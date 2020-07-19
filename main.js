@@ -1,11 +1,17 @@
-var time1;
-var alarmTime;
+const currentTimeElem = document.getElementById("current-time");
+const alarmInput = document.getElementById("alarm-input");
+let alarmCheckerInterval;
+setInterval(showTime, 1000);
 function showTime(){
   var date = new Date();
   var h = date.getHours();
   var m = date.getMinutes();
   var s = date.getSeconds();
-  time1 = h + m + s;
+  var session = "AM"
+  if (h > 12) {
+    h = h - 12
+    session = "PM"
+  }
   if (h < 10) {
     h = "0" + h
   }
@@ -15,18 +21,22 @@ function showTime(){
   if (s < 10) {
     s = "0" + s
   }
-  
-  var time2 = h + ":" + m + ":" + s ;
-  document.getElementById("realTime").innerText = time2;
-  
+  currentTimeElem.innerText = h + ":" + m + ":" + s + " " + session;
 }
-setInterval(showTime, 1000);
-  document.getElementById("setAlarm").onclick = () => {
-  var alrm_h = document.getElementById("hours").value;
-  var alrm_m = document.getElementById("minutes").value;
-  var alrm_s = document.getElementById("seconds").value;
-  alarmTime = alrm_h + alrm_m + alrm_s;
+ 
+ 
+function checkForAlarm() {
+  if(!alarmInput.value) {
+    return;
   }
-  if (alarmTime == time1) {
-    console.log("wake up")
+  currentTimeWithoutSec = currentTimeElem.innerText.slice(0,5)
+  if(alarmInput.value == currentTimeWithoutSec){
+    console.log("Wake up!!")
   }
+}
+ 
+document.getElementById("set-alarm").onclick = () => {
+  clearInterval(alarmCheckerInterval);
+  alarmCheckerInterval = setInterval(checkForAlarm, 1000)
+}
+ 
