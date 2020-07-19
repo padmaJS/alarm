@@ -1,4 +1,5 @@
 var time1;
+var alarmTime;
 function showTime(){
   var date = new Date();
   var h = date.getHours();
@@ -19,14 +20,13 @@ function showTime(){
   document.getElementById("realTime").innerText = time2;
   
 }
-
 setInterval(showTime, 1000);
-  
+  document.getElementById("setAlarm").onclick = () => {
   var alrm_h = document.getElementById("hours").value;
   var alrm_m = document.getElementById("minutes").value;
   var alrm_s = document.getElementById("seconds").value;
-  var alarmTime = alrm_h + alrm_m + alrm_s;
-  
+  alarmTime = alrm_h + alrm_m + alrm_s;
+  }
   if (alarmTime == time1) {
     console.log("wake up")
   }
