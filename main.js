@@ -23,7 +23,8 @@ function showTime(){
   }
   currentTimeElem.innerText = h + ":" + m + ":" + s + " " + session;
 }
- 
+
+var audio = document.getElementById("alarmSound");
  
 function checkForAlarm() {
   if(!alarmInput.value) {
@@ -31,12 +32,20 @@ function checkForAlarm() {
   }
   currentTimeWithoutSec = currentTimeElem.innerText.slice(0,5)
   if(alarmInput.value == currentTimeWithoutSec){
-    console.log("Wake up!!")
+    audio.play();
   }
 }
  
 document.getElementById("set-alarm").onclick = () => {
   clearInterval(alarmCheckerInterval);
   alarmCheckerInterval = setInterval(checkForAlarm, 1000)
+  clearButton.disabled = false;
 }
  
+var clearButton = document.getElementById("clear-alarm");
+
+clearButton.onclick = () => {
+  clearInterval(alarmCheckerInterval);
+  clearButton.disabled = true;
+  audio.pause();
+}
