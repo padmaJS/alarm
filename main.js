@@ -1,6 +1,7 @@
 const currentTimeElem = document.getElementById("current-time");
 const alarmInput = document.getElementById("alarm-input");
 let alarmCheckerInterval;
+let currentTimeWithoutSec;
 setInterval(showTime, 1000);
 function showTime(){
   var date = new Date();
