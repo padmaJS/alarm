@@ -1,0 +1,31 @@
+body{
+  text-align: center;
+  background-color: #212f3c;
+}
+
+h1{
+  font-size: 50px;
+  color: #d5dbdb;
+}
+
+.styling{
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  font-family: 'Oswald', sans-serif;
+  border: black;
+  border-radius: 15%;
+  margin: 0;
+}
+
+#alarm-input{
+  padding: 3px 2px;
+}
+
+#set-alarm{
+  padding: 3px 2px;
+}
+
+#clear-alarm{
+  padding: 3px 2px;
+}
