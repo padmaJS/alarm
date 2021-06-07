@@ -31,22 +31,29 @@ function checkForAlarm() {
   if(!alarmInput.value) {
     return;
   }
-  currentTimeWithoutSec = currentTimeElem.innerText.slice(0,5)
-  if(alarmInput.value == currentTimeWithoutSec){
+  var date = new Date();
+  var h = date.getHours();
+  var m = date.getMinutes();
+  var hour = Number(alarmInput.value.slice(0,2))
+  var minute = Number(alarmInput.value.slice(3))
+  if(h - hour == 0 && m - minute == 0){
     audio.play();
   }
 }
- 
-document.getElementById("set-alarm").onclick = () => {
-  clearInterval(alarmCheckerInterval);
+var startButton = document.getElementById("set-alarm")
+var clearButton = document.getElementById("clear-alarm");
+clearButton.disabled = true;
+
+startButton.onclick = () => {
   alarmCheckerInterval = setInterval(checkForAlarm, 1000)
   clearButton.disabled = false;
+  startButton.disabled = true;
 }
  
-var clearButton = document.getElementById("clear-alarm");
 
 clearButton.onclick = () => {
   clearInterval(alarmCheckerInterval);
+  startButton.disabled = false;
   clearButton.disabled = true;
   audio.pause();
 }
